@@ -1,25 +1,29 @@
-FROM node:lts-buster
+FROM nikolaik/python-nodejs:latest
 
 RUN apt-get update && \
-
   apt-get install -y \
-
+  neofetch \
+  chromium \
   ffmpeg \
-
-  imagemagick \
-
-  webp && \
-
-  apt-get upgrade -y && \
-
+  wget \
+  mc \
+  imagemagick && \
   rm -rf /var/lib/apt/lists/*
 
 COPY package.json .
+RUN npm install
+#RUN npm install -g npm-check-updates
+#RUN ncu --upgrade
 
-RUN npm install && npm install qrcode-terminal  npm install pm2 -g 
+RUN mkdir /mybot
+WORKDIR /mybot
+COPY . /mybot
+RUN python3 -m pip install -r /mybot/requirements.txt
+ENV TZ=Asia/Jakarta
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-COPY . .
+RUN ls
 
 EXPOSE 5000
 
-CMD ["node", "index.js"]
+CMD node start.js
