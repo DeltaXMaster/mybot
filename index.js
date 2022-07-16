@@ -209,7 +209,7 @@ async function startzaki() {
     zaki.ev.on('connection.update', async (update) => {
         const { connection, lastDisconnect } = update	    
         if (connection === 'close') {
-        let reason = new Boom(lastDisconnect.error).output.statusCode
+        let reason = new Boom(lastDisconnect?.error)?.output.statusCode
             if (reason === DisconnectReason.badSession) { console.log(`Bad Session File, Please Delete Session and Scan Again`); zaki.logout(); }
             else if (reason === DisconnectReason.connectionClosed) { console.log("Connection closed, reconnecting...."); startzaki(); }
             else if (reason === DisconnectReason.connectionLost) { console.log("Connection Lost from Server, reconnecting..."); startzaki(); }
