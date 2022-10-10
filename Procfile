@@ -1,1 +1,1 @@
-worker: npm i instagram-url-direct && npm i social_media_downloader && npm i translate-google-api && npm i -g typescript && npm i zs-extract && npm i hxz-api && npm i @bochilteam/scraper && npm i -g pm2 && pm2 start index.js && pm2 save && pm2 logs
+worker: pip install requests && npm i instagram-url-direct && npm i social_media_downloader && npm i translate-google-api && npm i -g typescript && npm i zs-extract && npm i hxz-api && npm i @bochilteam/scraper && npm i -g pm2 && pm2 start index.js && pm2 save && pm2 logs
